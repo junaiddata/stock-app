@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        h2 { background-color: #007bff; color: white; padding: 15px; }
+        .container { background: white; width: 50%; margin: auto; padding: 20px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); }
+        .info { font-size: 18px; margin: 10px 0; }
+        .stock { font-size: 24px; font-weight: bold; color: #007bff; }
+        .back-btn { margin-top: 20px; display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .back-btn:hover { background: #0056b3; }
+        .error-message { color: red; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>📦 Stock Details</h2>
+
+    <div class="container">
+        {% if item %}
+            <p class="info"><strong>Item Code:</strong> {{ item.ItemCode }}</p>
+            <p class="info"><strong>UPC Code:</strong> {{ item.UpcCode }}</p>
+            <p class="info"><strong>Description:</strong> {{ item.Description }}</p>
+            <p class="info"><strong>Manufacturer Name:</strong> {{ item.ManufacturerName }}</p>
+            <p class="info"><strong>Warehouse Code:</strong> {{ item.WarehouseCode }}</p>
+            <p class="info"><strong>Stock Quantity:</strong> <span class="stock">{{ item.StockQuantity }}</span></p>
+        {% else %}
+            <p class="error-message">❌ Item not found.</p>
+        {% endif %}
+        <a href="/" class="back-btn">🔙 Back to Search</a>
+    </div>
+
+</body>
+</html>

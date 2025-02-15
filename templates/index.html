@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Search</title>
+  <style>
+    body { font-family: 'Arial', sans-serif; background-color: #f4f4f4; text-align: center; }
+    h2 { background-color: #007bff; color: white; padding: 15px; margin: 0; }
+    .search-container { margin: 20px auto; width: 90%; max-width: 500px; }
+    input { width: 70%; padding: 12px; font-size: 16px; border: 2px solid #007bff; border-radius: 25px; outline: none; }
+    button { padding: 12px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 25px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    .no-results { font-size: 18px; color: #d9534f; margin-top: 20px; }
+    table { margin: 20px auto; border-collapse: collapse; width: 90%; max-width: 800px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background-color: #007bff; color: white; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    a { color: #007bff; text-decoration: none; }
+    a:hover { color: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <h2>🔍 Stock Search System</h2>
+
+  <div class="search-container">
+    <form method="post">
+      <input type="text" name="query" placeholder="Enter Item Code, UPC, or Description" value="{{ query }}">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  {% if results is not none %}
+    <h3>Results:</h3>
+    {% if results|length == 0 %}
+      <p class="no-results">❌ No matching results found.</p>
+    {% else %}
+      <table>
+        <thead>
+          <tr>
+            <th>Item Code</th>
+            <th>UPC Code</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in results %}
+            <tr>
+              <td>
+                <a href="{{ url_for('item_detail', item_code=item[0]) }}">
+                  {{ item[0] }}
+                </a>
+              </td>
+              <td>{{ item[1] }}</td>
+              <td>{{ item[2] }}</td>
+              <td>{{ item[5] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  {% endif %}
+
+</body>
+</html>

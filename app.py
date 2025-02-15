@@ -6,7 +6,8 @@ import os
 app = Flask(__name__)
 
 # Define the SQLite database file path
-DB_PATH = "stock_data5.db"
+DB_PATH = "/tmp/stock_data5.db"
+
 
 # Function to initialize (or re-initialize) the database with the Excel data
 def initialize_db(force_update=False):
